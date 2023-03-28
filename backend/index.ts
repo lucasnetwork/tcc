@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const express=  require("express")
+import mongoose from "mongoose";
+import express from "express";
+import Log from './models/log.schema'
 mongoose.connect('mongodb://root:example@10.0.0.115:3000').then(()=>{
     console.log("connect")
 }).catch((e)=>{
@@ -7,7 +8,6 @@ console.log("mongodb://root:example@10.0.0.115:3000")
 console.log(e)
 });
 
-const Cat = mongoose.model('Cat', { name: String });
 
 const app = express()
 app.use(express.json())
@@ -15,12 +15,18 @@ const router = express.Router()
 router.post("/",async (req,res)=>{
     try{
         console.log("request")
-        const cats =await Cat.find()
-        console.log(cats)
         console.log(req?.body)
     
-        const kitty = new Cat({ name: 'Zildjian' });
-        kitty.save().then(() => console.log('meow'));
+        const log = new Log({ 
+            date:req.body.DATE,
+            program:req.body.PROGRAM,
+            priority:req.body.PRIORITY,
+            message:req.body.MESSAGE,
+            isodate:req.body.ISODATE,
+            host:req.body.HOST,
+            facility:req.body.FACILITY,
+         });
+        await log.save();
         res.status(201).json({msg:"created"})
 
     }catch{
