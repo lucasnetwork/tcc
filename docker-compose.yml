@@ -1,15 +1,15 @@
 version: '3.8'
 services:
     syslog:
-        build:
-            context: .
-            dockerfile: dockerfile
+        build: ./syslog
+        container_name: tcc-syslog
         ports:
             - 500:514/udp
         links:
             - backend
     backend:
         build: ./backend
+        container_name: tcc-syslog
         volumes:
             - /backend
         ports:
