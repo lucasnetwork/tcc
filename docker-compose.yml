@@ -9,22 +9,19 @@ services:
             - backend
     backend:
         build: ./backend
-        container_name: tcc-syslog
+        container_name: tcc-backend
         volumes:
-            - /backend
+            - ./backend:/backend
         ports:
             - 5005:3333
-    postgres:
-        image: postgres
-        container_name: tcc-database
-        restart: always
-        ports:
-            - 5100:5432
         links:
-            - syslog
-        logging:
-            driver: syslog
-            options:
-                syslog-address: "udp://10.0.0.115:500"
+            - mongo
+    mongo:
+        image: mongo
+        container_name: tcc-mongo
+        restart: always
         environment:
-            POSTGRES_PASSWORD: example
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=example
+        ports:
+            - 3000:27017
