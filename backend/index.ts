@@ -1,38 +1,18 @@
 import mongoose from "mongoose";
 import express from "express";
-import Log from './models/log.schema'
+import LogController from "./controllers/log";
 mongoose.connect('mongodb://root:example@10.0.0.115:3000').then(()=>{
     console.log("connect")
 }).catch((e)=>{
 console.log("mongodb://root:example@10.0.0.115:3000")
 console.log(e)
 });
-
+const logController = new LogController()
 
 const app = express()
 app.use(express.json())
 const router = express.Router()
-router.post("/",async (req,res)=>{
-    try{
-        console.log("request")
-        console.log(req?.body)
-    
-        const log = new Log({ 
-            date:req.body.DATE,
-            program:req.body.PROGRAM,
-            priority:req.body.PRIORITY,
-            message:req.body.MESSAGE,
-            isodate:req.body.ISODATE,
-            host:req.body.HOST,
-            facility:req.body.FACILITY,
-         });
-        await log.save();
-        res.status(201).json({msg:"created"})
-
-    }catch{
-        res.status(500)
-    }
-})
+router.post("/",logController.create)
 
 
 app.use(router)
