@@ -20,6 +20,12 @@ class LogController{
             res.status(500)
         }
     }
+
+    async all(req:Request,res:Response){
+        const logs = await Log.find()
+
+        return res.status(200).json(logs)
+    }
 }
 
 export default LogController
