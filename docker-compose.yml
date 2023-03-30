@@ -16,6 +16,15 @@ services:
             - 5005:3333
         links:
             - mongo
+    frontend:
+        build: ./frontend
+        container_name: tcc-frontend
+        volumes:
+            - ./frontend:/frontend
+        ports:
+            - 3001:3333
+        links:
+            - backend
     mongo:
         image: mongo
         container_name: tcc-mongo
