@@ -1,10 +1,10 @@
-import express from "express";
+import {Router} from "express";
 import LogController from "./controllers/log";
 
 const logController = new LogController()
 
-const router = express.Router()
-router.post("/",logController.create)
-router.get("/",logController.all)
+const route = Router()
+route.post("/",logController.create)
+route.get("/",logController.all)
 
-export default router
+export default route
