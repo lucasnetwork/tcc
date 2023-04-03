@@ -24,6 +24,7 @@ class LogController{
     async all(req:Request,res:Response){
 
         const logs = await Log.find()
+        console.log(logs)
 
         return res.status(200).json(logs)
     }

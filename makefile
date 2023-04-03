@@ -4,7 +4,7 @@ install:
 run-docker-up:
 	docker-compose up -d
 run-docker-build:
-	docker-compose build --no-cache
+	docker-compose build 
 all:
 	make install
 	make run-docker-build

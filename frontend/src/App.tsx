@@ -4,7 +4,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [logs,setLogs] = useState([])
   useEffect(()=>{
-    axios.get("http://10.0.0.115:5005").then(response =>{
+    axios.get(import.meta.env.VITE_BACKEND_URL).then(response =>{
       console.log(response.data)
       setLogs(response.data)
     })
