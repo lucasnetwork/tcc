@@ -12,22 +12,24 @@ services:
         build: ./backend
         container_name: tcc-backend
         volumes:
-            - ./backend:/backend=
+            - ./backend:/backend
         ports:
             - 5005:${BACKEND_PORT}
         environment:
             - PORT=$BACKEND_PORT
         links:
             - mongo
+        env_file: 
+            - .env
     frontend:
         build: ./frontend
         container_name: tcc-frontend
         volumes:
             - ./frontend:/frontend
         environment:
-            - VITE_BACKEND_URL=$VITE_BACKEND_URL
+            - NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
         ports:
-            - 3001:5173
+            - 3001:3000
         links:
             - backend
         env_file: 
