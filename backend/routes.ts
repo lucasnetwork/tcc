@@ -5,6 +5,6 @@ const logController = new LogController()
 
 const route = Router()
 route.post("/",logController.create)
-route.get("/",logController.all)
+route.get("/logs",logController.all)
 
 export default route
