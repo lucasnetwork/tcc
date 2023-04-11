@@ -1,0 +1,13 @@
+.container_aside{
+    height:100vh;
+    background-color: #222A68;
+    max-width: 20rem;
+    width:100%;
+    padding:2rem 1rem;
+
+}
+
+.container_list{
+    list-style: none;  
+    font-size: 1.5rem; 
+}
