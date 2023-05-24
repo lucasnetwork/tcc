@@ -1,20 +1,25 @@
 Arguments: 
-  /home/lucassantosribeiro/.nvm/versions/node/v18.14.2/bin/node /usr/local/bin/yarn add dotenv
+  /usr/bin/node-18 /usr/local/bin/yarn add postgres typeorm
 
 PATH: 
-  /home/lucassantosribeiro/.nvm/versions/node/v18.14.2/bin:/home/lucassantosribeiro/.cargo/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:/home/lucassantosribeiro/Android/sdk/emulator:/home/lucassantosribeiro/Android/sdk/tools:/home/lucassantosribeiro/Android/sdk/tools/bin:/home/lucassantosribeiro/Android/sdk/platform-tools:/home/lucassantosribeiro/Android/sdk/emulator:/home/lucassantosribeiro/Android/sdk/tools:/home/lucassantosribeiro/Android/sdk/tools/bin:/home/lucassantosribeiro/Android/sdk/platform-tools
+  /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
 
 Yarn version: 
   1.22.19
 
 Node version: 
-  18.14.2
+  18.16.0
 
 Platform: 
   linux x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/lucassantosribeiro/Documentos/www/estudos/tcc2/tcc/backend/node_modules/.yarn-integrity'
+  SyntaxError: /home/lucas/Documentos/Estudos/tcc/backend/package.json: Unexpected token } in JSON at position 182
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -24,8 +29,8 @@ npm manifest:
     "license": "MIT",
     "dependencies": {
       "cors": "^2.8.5",
+      "dotenv": "^16.0.3",
       "express": "^4.18.2",
-      "mongoose": "^7.0.3"
     },
     "scripts": {
       "dev": "ts-node-dev --respawn --transpile-only server.ts"
@@ -369,6 +374,11 @@ Lockfile:
     version "4.0.2"
     resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
     integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+  
+  dotenv@^16.0.3:
+    version "16.0.3"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
+    integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
   
   dynamic-dedupe@^0.3.0:
     version "0.3.0"
