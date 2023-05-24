@@ -17,8 +17,13 @@ services:
             - 5005:${BACKEND_PORT}
         environment:
             - PORT=$BACKEND_PORT
+            - POSTGRES_HOST=$BACKEND_POSTGRES_HOST
+            - POSTGRES_PORT=$BACKEND_POSTGRES_PORT
+            - POSTGRES_USER=$BACKEND_POSTGRES_USER
+            - POSTGRES_PASSWORD=$BACKEND_POSTGRES_PASSWORD
+            - POSTGRES_DB=$BACKEND_POSTGRES_DB
         links:
-            - mongo
+            - log-database
         env_file: 
             - .env
     frontend:
@@ -29,17 +34,17 @@ services:
         environment:
             - NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
         ports:
-            - 3001:3000
+            - 3002:3000
         links:
             - backend
         env_file: 
             - .env
-    mongo:
-        image: mongo
+    log-database:
+        image: postgres
         container_name: tcc-mongo
-        restart: always
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=root
-            - MONGO_INITDB_ROOT_PASSWORD=example
+            - POSTGRES_USER=adm
+            - POSTGRES_PASSWORD=12345
+            - POSTGRES_DB=logs
         ports:
-            - 3000:27017
+            - '5556:5432'

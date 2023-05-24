@@ -7,11 +7,14 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "postgres": "^3.3.4",
+    "pg": "^8.11.0",
     "typeorm": "^0.3.16"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "migration:generate": "ts-node-dev ./node_modules/typeorm/cli migration:generate -d ./src/database/index.ts",
+    "migration:create": "ts-node-dev ./node_modules/typeorm/cli migration:create",
+    "migration:run": "ts-node-dev ./node_modules/typeorm/cli migration:run -d ./src/database/index.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
