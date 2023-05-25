@@ -41,7 +41,7 @@ services:
             - .env
     log-database:
         image: postgres
-        container_name: tcc-mongo
+        container_name: tcc-database
         environment:
             - POSTGRES_USER=adm
             - POSTGRES_PASSWORD=12345

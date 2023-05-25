@@ -1,10 +1,16 @@
 import {Router} from "express";
 import LogController from "./controllers/log";
+import { LogRepository } from "./database/repositories/log.repository";
 
-const logController = new LogController()
 
 const route = Router()
-route.post("/",logController.create)
-route.get("/logs",logController.all)
+route.post("/",async(req,res)=>{
+    console.log('oi2')
+    const logRepository = new LogRepository()
+    const logController = new LogController(logRepository)
+   const response =await logController.create(req,res)
+   return response
+})
+// route.get("/logs",logController.all)
 
 export default route

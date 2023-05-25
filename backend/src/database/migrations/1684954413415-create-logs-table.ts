@@ -10,6 +10,7 @@ export class CreateLogsTable1684954413415 implements MigrationInterface {
             name: "id",
             type: "uuid",
             isPrimary: true,
+            default: 'uuid_generate_v4()',
           },
           {
             name: "program",
