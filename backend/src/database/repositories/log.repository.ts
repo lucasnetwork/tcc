@@ -13,16 +13,12 @@ export class LogRepository implements ILogRepository {
     }
 
     async create(feature: ILog): Promise<ILog> {
-        console.log("newFeature2",feature)
        const newFeature =  this.logs.create(feature);
-       console.log("newFeature",newFeature)
        await this.logs.save(newFeature);
        return newFeature;
     }
-    // async update(feature: Feature): Promise<Feature> {
-    //     return await this.features.save(feature);
-    // }
-    // async delete(feature: Feature): Promise<Feature> {
-    //     return await this.features.remove(feature);
-    // }
+    async all(): Promise<ILog[]> {
+        const features = this.logs.find()
+        return features
+    }
 }

@@ -1,9 +1,10 @@
 import {Request,Response} from 'express'
-import { LogRepository } from 'src/database/repositories/log.repository'
+import { ILogRepository } from 'src/implements/logRepository'
+import { IUseCase } from 'src/useCases/IUseCase'
 // import Log from '../models/log.schema'
-class LogController{
-    constructor(private logRepository:LogRepository){}
-    async create(req:Request,res:Response){
+class CreateLogController implements IUseCase{
+    constructor(private logRepository:ILogRepository){}
+    async handle(req:Request,res:Response){
         try{
             console.log(req.body)
             const response =await this.logRepository.create({
@@ -25,13 +26,6 @@ class LogController{
         }
     }
 
-    async all(req:Request,res:Response){
-
-        // const logs = await Log.find()
-        // console.log(logs)
-
-        return res.status(200).json([])
-    }
 }
 
-export default LogController
+export default CreateLogController
