@@ -14,5 +14,4 @@ RUN apt-get install -y syslog-ng
 COPY ./config/syslog-ng.conf /etc/syslog-ng/
 # COPY ./.syslog.env /opt/.syslog.env 
 ADD ./syslog.env.conf /opt/
-
-ENTRYPOINT ["/usr/sbin/syslog-ng", "-F"]
+CMD ["syslog-ng", "-F"]
