@@ -22,7 +22,9 @@ export const InitializeConnection = async () => {
 
   try {
     await AppSource.setOptions({ host, database }).initialize();
+    console.log("database online")
   } catch (err) {
+    console.log("err1",err)
     process.exit(1);
   }
 };

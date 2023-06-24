@@ -5,7 +5,8 @@ import { IUseCase } from 'src/useCases/IUseCase'
 class AllLogController implements IUseCase{
     constructor(private logRepository:ILogRepository){}
     async handle(req:Request,res:Response){
-        const logs = this.logRepository.all()
+        const logs =await this.logRepository.all()
+        console.log("logs",logs)
         return res.status(200).json(logs)
     }
 }

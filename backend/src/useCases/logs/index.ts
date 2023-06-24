@@ -1,6 +1,6 @@
-import CreateLogController from "src/controllers/log/create"
-import AllLogController from "src/controllers/log/findAll"
-import { LogRepository } from "src/database/repositories/log.repository"
+import CreateLogController from "../../controllers/log/create"
+import AllLogController from "../../controllers/log/findAll"
+import { LogRepository } from "../../database/repositories/log.repository"
 
 export const createLogUseCase = () =>{
     const logRepository = new LogRepository()
