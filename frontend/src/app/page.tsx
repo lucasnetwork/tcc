@@ -4,15 +4,30 @@ import Chart from './components/Chart'
 import styles from './page.module.css'
 import useSWR from 'swr'
 import api from '../../config/api'
+import Table from './components/Table'
+import { useMemo } from 'react'
+import { format, parseISO } from 'date-fns'
 
 const fetcher = (url:string) => {
   console.log("Oio")
   return api.get(url)
 }
 export default function Home() {
-  const {data} = useSWR("logs",fetcher)
-  console.log(data)
-  console.log(process.env.NEXT_PUBLIC_URL)
+  const {data} = useSWR<{
+    data:any[]
+  }>("logs",fetcher)
+
+  const logsFormated = useMemo(()=>{
+    if(!data){
+      return []
+    }
+    const logs = data.data.map(log =>{
+      const date = format(parseISO(log.isodate),"dd/MM/yyyy HH:mm:ss")
+      return {...log,isodate:date}
+    })
+
+    return logs
+  },[data])
   return (
     <main className={styles.main}>
       <div className={styles.container_bar}>
@@ -32,32 +47,7 @@ export default function Home() {
       </div>
       <div>
       <p className={styles.title}>Logs</p>
-    <table className={styles.table}>
-      <thead>
-      <tr>
-      <th>Programa</th>
-      <th>Prioridade</th>
-      <th>Mensagem</th>
-      <th>Data</th>
-      <th>Host</th>
-      <th>Processo</th>
-    </tr>
-      </thead>
-      <tbody>
-        {data?.data?.map(log =>(
-          <tr key={log._id}>
-
-      <td>{log.program}</td>
-      <td>{log.priority}</td>
-      <td>{log.message}</td>
-      <td>{log.isodate}</td>
-      <td>{log.host}</td>
-      <td>{log.facility}</td>
-          </tr>
-        ))}
-
-      </tbody>
-    </table>
+    <Table logs={logsFormated}/>
       </div>
     </main>
   )
