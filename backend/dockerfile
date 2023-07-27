@@ -1,4 +1,20 @@
-FROM node:18
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install -y python3
+RUN apt-get install -y python3-pip
+RUN pip install pysigma
+RUN python3 -m pip install sigma-cli
+
+RUN sigma plugin install elasticsearch
+
+RUN  apt-get -y install curl
+RUN curl -fsSL https://deb.nodesource.com/18.x -o /tmp/nodesource_setup.sh
+RUN bash /tmp/nodesource_setup.sh
+RUN apt-get update
+RUN apt-get install -y nodejs
+RUN apt-get install -y build-essential
+RUN npm install --global yarn
 
 WORKDIR /backend
 
