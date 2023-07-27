@@ -1,6 +1,5 @@
 version: '3.8'
 services:
-
     syslog:
         build: ./syslog
         container_name: tcc-syslog
@@ -23,7 +22,7 @@ services:
             - POSTGRES_PASSWORD=$BACKEND_POSTGRES_PASSWORD
             - POSTGRES_DB=$BACKEND_POSTGRES_DB
         links:
-            - log-database
+            - elasticsearch
         env_file: 
             - .env
     frontend:
@@ -39,7 +38,7 @@ services:
             - backend
         env_file: 
             - .env
-    log-database:
+    log-database-of-log-time:
         image: postgres
         container_name: tcc-database
         environment:
@@ -48,3 +47,13 @@ services:
             - POSTGRES_DB=logs
         ports:
             - '5556:5432'
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+
+            - xpack.security.enrollment.enabled=false
+        ports:
+            - "9200:9200"
+            - "9300:9300"
