@@ -1,13 +1,17 @@
+
 import {Request,Response} from 'express'
-import { ILogRepository } from 'src/implements/logRepository'
-import { IUseCase } from 'src/useCases/IUseCase'
-// import Log from '../models/log.schema'
+import elasticClient from '../../database/elasticSearchClient'
+import { ILogRepository } from '../../implements/logRepository'
+import { IUseCase } from '../../useCases/IUseCase'
+
 class CreateLogController implements IUseCase{
     constructor(private logRepository:ILogRepository){}
     async handle(req:Request,res:Response){
         try{
-            console.log(req.body)
-            const response =await this.logRepository.create({
+            console.log("req.body.",req.body)
+            await elasticClient.index({
+                index:"log",
+                body:{
                 date:req.body.DATE,
                 program:req.body.PROGRAM,
                 priority:req.body.PRIORITY,
@@ -15,9 +19,9 @@ class CreateLogController implements IUseCase{
                 isodate:req.body.ISODATE,
                 host:req.body.HOST,
                 facility:req.body.FACILITY,
+                }
             })
-            console.log(response)
-            res.status(201).json(response)
+            res.status(201).json({})
     
         }catch(e){
             console.log("oio")

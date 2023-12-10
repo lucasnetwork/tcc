@@ -11,7 +11,6 @@ export class LogRepository implements ILogRepository {
         this.logs = AppSource.getRepository(LogEntity);
     }
     async create(feature: ILog): Promise<ILog> {
-        console.log("create")
        const newFeature =  this.logs.create(feature);
        await this.logs.save(newFeature);
        return newFeature;
@@ -19,5 +18,10 @@ export class LogRepository implements ILogRepository {
     async all(): Promise<ILog[]> {
         const features = await this.logs.find()
         return features
+    }
+    async createMany(log: ILog[]): Promise<void> {
+       const newFeature = log.map(log=>this.logs.create(log))
+       await this.logs.save(newFeature) 
+       return
     }
 }
