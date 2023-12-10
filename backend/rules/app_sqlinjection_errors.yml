@@ -16,15 +16,16 @@ logsource:
     definition: 'Requirements: application error logs must be collected (with LOG_LEVEL ERROR and above)'
 detection:
     keywords:
-        # Oracle
-        - quoted string not properly terminated
-        # MySQL
-        - You have an error in your SQL syntax
-        # SQL Server
-        - Unclosed quotation mark
-        # SQLite
-        - 'near "*": syntax error'
-        - SELECTs to the left and right of UNION do not have the same number of result columns
+        message:
+            # Oracle
+            - quoted string not properly terminated
+            # MySQL
+            - You have an error in your SQL syntax
+            # SQL Server
+            - Unclosed quotation mark
+            # SQLite
+            - 'near "*": syntax error'
+            - SELECTs to the left and right of UNION do not have the same number of result columns
     condition: keywords
 falsepositives:
     - A syntax error in MySQL also occurs in non-dynamic (safe) queries if there is an empty in() clause, that may often be the case.

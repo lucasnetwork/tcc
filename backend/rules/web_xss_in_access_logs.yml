@@ -17,22 +17,24 @@ detection:
     select_method:
         cs-method: 'GET'
     keywords:
-        - '=<script>'
-        - '=%3Cscript%3E'
-        - '=%253Cscript%253E'
-        - '<iframe '
-        - '%3Ciframe '
-        - '<svg '
-        - '%3Csvg '
-        - 'document.cookie'
-        - 'document.domain'
-        - ' onerror='
-        - ' onresize='
-        - ' onload="'
-        - 'onmouseover='
-        - '${alert'
-        - 'javascript:alert'
-        - 'javascript%3Aalert'
+        message:
+            - '=<script>'
+            - '=%3Cscript%3E'
+            - '=%253Cscript%253E'
+            - '<iframe '
+            - '%3Ciframe '
+            - '<svg '
+            - '%3Csvg '
+            - 'document.cookie'
+            - 'document.domain'
+            - ' onerror='
+            - ' onresize='
+            - ' onload="'
+            - 'onmouseover='
+            - '${alert'
+            - 'javascript:alert'
+            - 'javascript%3Aalert'
+    condition: keywords
     filter:
         sc-status: 404
     condition: select_method and keywords and not filter
