@@ -15,3 +15,5 @@ COPY ./config/syslog-ng.conf /etc/syslog-ng/
 # COPY ./.syslog.env /opt/.syslog.env 
 ADD ./syslog.env.conf /opt/
 CMD ["syslog-ng", "-F"]
+
+expose 514/udp

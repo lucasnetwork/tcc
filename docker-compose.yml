@@ -5,6 +5,8 @@ services:
         container_name: tcc-syslog
         ports:
             - 500:514/udp
+        networks:
+            - app
         links:
             - backend
     backend:
@@ -13,9 +15,9 @@ services:
         volumes:
             - ./backend:/backend
         ports:
-            - 5005:${BACKEND_PORT}
+            - 5005:3000
         environment:
-            - PORT=$BACKEND_PORT
+            - PORT=3000
             - POSTGRES_HOST=$BACKEND_POSTGRES_HOST
             - POSTGRES_PORT=$BACKEND_POSTGRES_PORT
             - POSTGRES_USER=$BACKEND_POSTGRES_USER
@@ -24,7 +26,14 @@ services:
         links:
             - elasticsearch
         env_file: 
-            - .env
+            - .env  
+        networks:
+            - app
+        # logging:
+        #     driver: syslog
+        #     options:
+        #         syslog-address: "udp://192.168.0.111:500"
+        #         tag: "BACKEND"
     frontend:
         build: ./frontend
         container_name: tcc-frontend
@@ -34,19 +43,29 @@ services:
             - NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
         ports:
             - 3002:3000
-        links:
-            - backend
         env_file: 
-            - .env
-    log-database-of-log-time:
+            - .env  
+        networks:
+            - app
+        depends_on:
+            - syslog
+        logging:
+            driver: syslog
+            options:
+                syslog-address: "udp://192.168.0.111:500"
+                tag: "FRONTEND"
+    log-database:
         image: postgres
         container_name: tcc-database
         environment:
             - POSTGRES_USER=adm
             - POSTGRES_PASSWORD=12345
-            - POSTGRES_DB=logs
+            - POSTGRES_DB=logs       
+        networks:
+            - app
         ports:
             - '5556:5432'
+        command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
         environment:
@@ -54,6 +73,9 @@ services:
             - xpack.security.enabled=false
 
             - xpack.security.enrollment.enabled=false
-        ports:
-            - "9200:9200"
-            - "9300:9300"
+        networks:
+            - app
+
+networks:
+  app:
+    driver: bridge
