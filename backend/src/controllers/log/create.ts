@@ -24,8 +24,6 @@ class CreateLogController implements IUseCase{
             res.status(201).json({})
     
         }catch(e){
-            console.log("oio")
-            console.log(e)
             res.status(200)
         }
     }

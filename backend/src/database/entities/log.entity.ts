@@ -2,35 +2,35 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-} from "typeorm";
+  CreateDateColumn
+} from 'typeorm'
 
-@Entity("logs")
+@Entity('logs')
 export class LogEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+    id: string
 
   @Column()
-  program: string;
+    program: string
 
   @Column()
-  priority: string;
+    priority: string
 
   @Column()
-  message: string;
+    message: string
 
   @Column()
-  isodate: string;
+    isodate: string
 
   @Column()
-  host: string;
+    host: string
 
   @Column()
-  facility: string;
+    facility: string
 
   @Column()
-  date: string;
+    date: string
 
   @CreateDateColumn()
-  created_at: Date;
+    created_at: Date
 }

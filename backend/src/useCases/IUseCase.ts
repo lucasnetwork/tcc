@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
+import { type Request, type Response } from 'express'
 
-export interface IUseCase{
-    handle:(req:Request,res:Response)=>unknown
+export interface IUseCase {
+  handle: (req: Request, res: Response) => unknown
 }
