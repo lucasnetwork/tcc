@@ -6,7 +6,7 @@ class AllLogController implements IUseCase {
   constructor (private readonly logRepository: ILogRepository) {}
   async handle (req: Request, res: Response) {
     const logs = await this.logRepository.all()
-    return res.status(200).json(logs)
+    return logs
   }
 }
 

@@ -34,6 +34,7 @@ class GetLogsToAnalisysController implements IUseCase {
       rule: string
     }> = []
     responsePromises.forEach((response, index) => {
+      console.log(response.hits.hits)
       const values = response.hits.hits.map(hit => ({
         date: hit._source.date,
         program: hit._source.program,

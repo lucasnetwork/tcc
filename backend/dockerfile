@@ -4,7 +4,7 @@ RUN apt-get -y upgrade
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 RUN pip install pysigma
-RUN python3 -m pip install "sigma-cli==0.7.10"
+RUN python3 -m pip install sigma-cli
 
 RUN sigma plugin install elasticsearch
 

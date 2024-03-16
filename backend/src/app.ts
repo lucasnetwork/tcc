@@ -14,7 +14,8 @@ class App {
     this.app = express()
     this.app.use(cors())
     this.app.use(express.json())
-    this.app.use(router)
+    console.log('oio')
+    this.app.use('/', router)
     const handle = getLogsToAnalisys()
     const handleCreateAlert = createLogAlertUseCase()
 
