@@ -13,7 +13,7 @@ class CreateLogController implements IUseCase{
                 index:"log",
                 body:{
                 date:req.body.DATE,
-                program:req.body.PROGRAM,
+                program:req.body.PROGRAM|| "",
                 priority:req.body.PRIORITY,
                 message:req.body.MESSAGE || "",
                 isodate:req.body.ISODATE,

@@ -27,4 +27,17 @@ export class LogRepository implements ILogRepository {
     const newFeature = log.map(log => this.logs.create(log))
     await this.logs.save(newFeature)
   }
+
+  async findOne (id: string): Promise<ILog> {
+    const feature = await this.logs.findOne({
+      where: {
+        id
+      }
+    })
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (!feature) {
+      throw new Error('Log not found')
+    }
+    return feature
+  }
 }
