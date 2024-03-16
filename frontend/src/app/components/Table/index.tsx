@@ -1,4 +1,5 @@
 "use client";
+import Log from "./components/Log";
 import styles from "./styles.module.css";
 const Table = ({ logs }) => (
   <div className={styles.table}>
@@ -48,50 +49,7 @@ const Table = ({ logs }) => (
     </div>
     <ul className={styles.contentTable}>
       {logs?.map((log) => (
-        <li key={log.id}>
-          <p
-            style={{
-              flex: 1,
-            }}
-          >
-            {log.program}
-          </p>
-          <p
-            style={{
-              flex: 1,
-            }}
-          >
-            {log.priority}
-          </p>
-          <p
-            style={{
-              flex: 2,
-            }}
-          >
-            {log.message}
-          </p>
-          <p
-            style={{
-              flex: 0.8,
-            }}
-          >
-            {log.isodate}
-          </p>
-          <p
-            style={{
-              flex: 0.8,
-            }}
-          >
-            {log.host}
-          </p>
-          <p
-            style={{
-              flex: 0.5,
-            }}
-          >
-            {log.facility}
-          </p>
-        </li>
+       <Log log={log} key={log.id} />
       ))}
     </ul>
   </div>

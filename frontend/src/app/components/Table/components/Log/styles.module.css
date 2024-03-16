@@ -1,0 +1,11 @@
+.container_paragraph{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container_button{
+    background: none;
+    border:none;
+    cursor: pointer;
+}
