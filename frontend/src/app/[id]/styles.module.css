@@ -1,0 +1,40 @@
+.container_paragraph{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container_button{
+    background: none;
+    border:none;
+    cursor: pointer;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 6rem;
+  padding-top: 1rem;
+  min-height: 100vh;
+  align-self: stretch;
+  flex:1;
+  overflow:auto
+}
+
+.container{
+    display: flex;
+    row-gap:2rem;
+    column-gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.container h2{
+  font-size: 1.25rem;
+}
+
+.titleH1{
+  font-size:2rem;
+  margin-bottom:1rem;
+  margin-top:1rem
+
+}

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./styles.module.css"
 import { SlArrowDown } from "react-icons/sl";
+import Link from "next/link";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const Log = ({log}:{
     log:{
@@ -69,6 +71,9 @@ const Log = ({log}:{
         >
           {log.facility}
         </p>
+        <Link href={`/${log.id}`}>
+        <MdOutlineRemoveRedEye />
+        </Link>
        
       </li>
     )
