@@ -18,6 +18,7 @@
     padding:1rem;
     flex: attr(data-size);
     border-radius: 0.5rem;
+    font-size: 20px;
   }
   
 .contentTable {
@@ -29,17 +30,13 @@
 }
 .contentTable li p{
     padding:0.5rem 1rem;
+    font-size: 20px;
     flex:attr(data-size);
 }
-.contentTable li p:nth-child(1n){
-    background-color: #62ADF9;
-}
-.contentTable li p:nth-child(2n){
-    background-color: #054A91;
+.contentTable li p{
+    border-bottom:1px solid #aaa;
 }
 
-
-  
   .filterContainer{
     display: flex;
     margin-top:1rem;

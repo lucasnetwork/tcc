@@ -10,13 +10,13 @@ import { format, parseISO } from 'date-fns'
 
 const fetcher = (url:string) => {
   console.log("Oio")
+  console.log(process.env.NEXT_PUBLIC_URL)
   return api.get(url)
 }
 export default function Home() {
-  const {data} = useSWR<{
+  const {data,error} = useSWR<{
     data:any[]
   }>("logs",fetcher)
-
   const logsFormated = useMemo(()=>{
     if(!data){
       return []
@@ -28,22 +28,15 @@ export default function Home() {
 
     return logs
   },[data])
+
   return (
     <main className={styles.main}>
+      <h1 className={styles.titleH1}>Dashboard</h1>
       <div className={styles.container_bar}>
-      <Chart />
+      <Chart logs={data?.data||[]} />
 
       </div>
       <div>
-      <p className={styles.title}>Filtros</p>
-      <div className={styles.filterContainer}>
-        <ButtonFilter label='Prioridade'/>
-        <ButtonFilter label='Programa'/>
-        <ButtonFilter label='Data'/>
-        <ButtonFilter label='Processo'/>
-        <ButtonFilter label='Host'/>
-      </div>
-
       </div>
       <div>
       <p className={styles.title}>Logs</p>
