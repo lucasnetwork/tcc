@@ -21,7 +21,14 @@ export default function RootLayout({
           </nav>
         </aside> */}
     
-        {children}
+      <div style={{
+        flex:1
+      }}>
+        <header className={styles.containerHeader}>
+          SIEM
+        </header>
+      {children}
+      </div>
         </body>
     </html>
   )

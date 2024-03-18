@@ -5,6 +5,7 @@ import api from '../../../config/api'
 import { useMemo } from 'react'
 import { format, parseISO } from 'date-fns'
 import { useParams, useRouter } from 'next/navigation'
+import { IoIosArrowDropleftCircle } from "react-icons/io";
 
 const fetcher = ([url,id]:string[]) => {
   console.log("Oio")
@@ -13,6 +14,7 @@ const fetcher = ([url,id]:string[]) => {
 }
 export default function Home() {
     const route = useParams()
+    const router = useRouter()
   const {data,error} = useSWR<{
     data:any[]
   }>(["log",route.id],fetcher)
@@ -26,6 +28,12 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div className={styles.goBack}>
+        <button type="button" onClick={()=>router.back()}>
+        <IoIosArrowDropleftCircle  size={32}/>
+        </button>
+        <p>Voltar</p>
+      </div>
       <h1 className={styles.titleH1}>Log</h1>
       <div className={styles.container}>
         <div>
@@ -89,9 +97,17 @@ export default function Home() {
       <div>
         <h2>Mensagem</h2>
         <p
+        style={{
+          fontSize:"1.25rem"
+        }}
         >
           {data?.data?.message}
         </p>
+       </div>
+       <div>
+        <button type="button" className={styles.button}>
+          Remover log
+        </button>
        </div>
     </main>
   )
