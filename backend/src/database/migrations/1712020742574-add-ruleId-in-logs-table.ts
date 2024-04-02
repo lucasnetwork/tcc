@@ -5,7 +5,7 @@ export class AddRuleIdInLogsTable1712020742574 implements MigrationInterface {
     await queryRunner.addColumn('logs',
       new TableColumn({
         name: 'ruleId',
-        type: 'varchar',
+        type: 'uuid',
         isNullable: true
       })
     )
