@@ -2,8 +2,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn
+  CreateDateColumn,
+  JoinColumn,
+  OneToOne
 } from 'typeorm'
+import { RuleEntitie } from './rule.entity'
 
 @Entity('logs')
 export class LogEntity {
@@ -27,6 +30,10 @@ export class LogEntity {
 
   @Column()
     facility: string
+
+  @OneToOne(() => RuleEntitie, (rule: RuleEntitie) => rule.Logs)
+  @JoinColumn()
+    rule: RuleEntitie
 
   @Column()
     date: string
