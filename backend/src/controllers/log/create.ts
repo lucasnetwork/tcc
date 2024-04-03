@@ -1,10 +1,9 @@
 import { type Request, type Response } from 'express'
 import elasticClient from '../../database/elasticSearchClient'
-import { type ILogRepository } from '../../implements/logRepository'
 import { type IUseCase } from '../../useCases/IUseCase'
 
 class CreateLogController implements IUseCase {
-  constructor (private readonly logRepository: ILogRepository) {}
+  constructor () {}
   async handle (req: Request, res: Response) {
     try {
       await elasticClient.index({

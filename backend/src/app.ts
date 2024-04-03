@@ -14,13 +14,12 @@ class App {
     this.app = express()
     this.app.use(cors())
     this.app.use(express.json())
-    console.log('oio')
     this.app.use('/', router)
     const handle = getLogsToAnalisys()
     const handleCreateAlert = createLogAlertUseCase()
 
     const job = new CronJob(
-      '1 * * * * *',
+      '* * * * * *',
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       async (): Promise<void> => {
         const response = await handle.handle()

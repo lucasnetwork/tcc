@@ -3,12 +3,13 @@ import { spawn } from 'node:child_process'
 import fs from 'fs'
 import path from 'path'
 import elasticClient from '../../database/elasticSearchClient'
+import { RuleRepository } from '../../database/repositories/rule.repository'
 class GetLogsToAnalisysController implements IUseCase {
   async handle () {
     const paths = fs.readdirSync(path.resolve(__dirname, '..', '..', '..', 'rules'))
     const responses = paths.map(async (pathName) => {
       const query = await this.getQuery(`/rules/${pathName}`)
-      console.log('query,', query)
+      console.log('quersy,', query)
       const response = await elasticClient.search({
         query: {
 
@@ -18,7 +19,16 @@ class GetLogsToAnalisysController implements IUseCase {
           }
         }
       })
-      return response
+      const rule = new RuleRepository()
+      const findRule = await rule.findOne({
+        where: {
+          rule: pathName.replace('.yml', '')
+        }
+      })
+      return {
+        data: response,
+        rule: findRule
+      }
     })
     const responsePromises = await Promise.all(responses)
     const responseFormated: Array<{
@@ -34,8 +44,7 @@ class GetLogsToAnalisysController implements IUseCase {
       rule: string
     }> = []
     responsePromises.forEach((response, index) => {
-      console.log(response.hits.hits)
-      const values = response.hits.hits.map(hit => ({
+      const values = response.data.hits.hits.map(hit => ({
         date: hit._source.date,
         program: hit._source.program,
         priority: hit._source.priority,
@@ -43,7 +52,8 @@ class GetLogsToAnalisysController implements IUseCase {
         isodate: hit._source.isodate,
         host: hit._source.host,
         facility: hit._source.facility,
-        id: hit._id
+        id: hit._id,
+        rule: response.rule
       }))
       responseFormated.push({
         data: [...values],

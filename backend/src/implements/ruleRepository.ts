@@ -1,4 +1,4 @@
-import { type RuleEntitie } from 'src/database/entities/rule.entity'
+import { type RuleEntitie } from '../database/entities/rule.entity'
 import { type ILog } from './log'
 import { type FindOneOptions } from 'typeorm'
 
