@@ -13,7 +13,7 @@ export class RuleEntitie {
     id: string
 
   @Column()
-    name: string
+    rule: string
 
   @OneToMany(() => LogEntity, (log: LogEntity) => log.rule)
   @JoinColumn()

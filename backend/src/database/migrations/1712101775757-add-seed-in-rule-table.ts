@@ -5,20 +5,20 @@ export class AddSeedInRuleTable1712101775757 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     const ruleRepo = queryRunner.manager.getRepository(RuleEntitie)
     await ruleRepo.save([{
-      name: 'app_sqlinjection_errors'
+      rule: 'app_sqlinjection_errors'
     },
     {
-      name: 'nodejs_rce_exploitation_attempt'
+      rule: 'nodejs_rce_exploitation_attempt'
     },
     {
-      name: 'web_sql_injection_in_access_logs'
+      rule: 'web_sql_injection_in_access_logs'
     },
     {
-      name: 'web_xss_in_access_logs'
+      rule: 'web_xss_in_access_logs'
     }
     ])
   }
 
-  public async down (queryRunner: QueryRunner): Promise<void> {
+  public async down (_queryRunner: QueryRunner): Promise<void> {
   }
 }

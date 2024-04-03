@@ -4,7 +4,7 @@ import { AppSource } from '..'
 import { type ILog } from '../../implements/log'
 import { RuleEntitie } from '../entities/rule.entity'
 
-export class LogRepository implements IRuleRepository {
+export class RuleRepository implements IRuleRepository {
   private readonly rules: Repository<RuleEntitie>
   constructor () {
     this.rules = AppSource.getRepository(RuleEntitie)
