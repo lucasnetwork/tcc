@@ -1,7 +1,9 @@
+import dotenv from 'dotenv'
 import { Client } from '@elastic/elasticsearch'
+dotenv.config()
 
 const elasticClient = new Client({
-  node: 'http://elasticsearch-1:9200'
+  node: process.env.ELASTIC_SEARCH_URL
 })
 
 export default elasticClient

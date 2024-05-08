@@ -10,8 +10,10 @@ export class RuleRepository implements IRuleRepository {
     this.rules = AppSource.getRepository(RuleEntitie)
   }
 
-  async create (feature: ILog): Promise<RuleEntitie> {
-    const newFeature = this.rules.create(feature)
+  async create (name: string): Promise<RuleEntitie> {
+    const newFeature = this.rules.create({
+      rule: name
+    })
     await this.rules.save(newFeature)
     return newFeature
   }
@@ -28,6 +30,7 @@ export class RuleRepository implements IRuleRepository {
 
   async findOne (data: FindOneOptions<RuleEntitie>): Promise<RuleEntitie> {
     const feature = await this.rules.findOne(data)
+    console.log(data.where)
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!feature) {
       throw new Error('Log not found')

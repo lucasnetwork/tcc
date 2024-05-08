@@ -1,0 +1,22 @@
+title: AccessAttempt
+id: 65354b83-a2ea-4ea6-8414-3ab38be0d409
+status: test
+description: Detects data exception of postgres
+references:
+    - https://www.postgresql.org/docs/current/errcodes-appendix.html
+author: Lucas Santos Ribeiro
+date: 2024/04/16
+modified: 2024/04/16
+logsource:
+    category: application
+detection:
+    selection:
+        message:
+            - 'Failed password for user from'
+            - 'Successful login for user from'
+            - 'Attempted access to restricted endpoint by user from'
+            - 'Directory index forbidden'
+            - 'IP address "*" blocked due to security policy violation'
+        priority: crit
+    condition: selection
+level: high

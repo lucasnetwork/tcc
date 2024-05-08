@@ -23,6 +23,7 @@ class App {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       async (): Promise<void> => {
         const response = await handle.handle()
+        if (response.length === 0) return
         await handleCreateAlert.handle(response.reduce((prev, data) => [...prev, ...data.data], []))
       },
       null,

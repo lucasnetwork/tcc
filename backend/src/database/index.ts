@@ -13,7 +13,6 @@ const options: DataSourceOptions = {
   migrations: ['./src/database/migrations/*.ts'],
   entities: ['./src/database/entities/*.ts']
 }
-console.log(process.env)
 
 export const AppSource = new DataSource(options)
 

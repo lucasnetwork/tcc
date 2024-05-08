@@ -17,9 +17,8 @@ tags:
 logsource:
     category: application
 detection:
-    keywords:
+    selection:
         message:
-            - '%271%27%3D%271'
             - '=select '
             - '=select('
             - '=select%20'
@@ -37,22 +36,16 @@ detection:
             - 'select * '
             - 'select database()'
             - 'select version()'
-            - 'select%20*%20'
-            - 'select%20database()'
-            - 'select%20version()'
-            - 'select%28sleep%2810%29'
             - 'SELECTCHAR('
             - 'table_schema'
             - 'UNION ALL SELECT'
             - 'UNION SELECT'
             - 'UNION%20ALL%20SELECT'
             - 'UNION%20SELECT'
-            - "'1'='1'"
-        program:
-            - BACKEND
-        priority:
-            - alert
-    condition: keywords
+            - "1=1"
+        program: DATABASE
+        priority: alert
+    condition: selection
 falsepositives:
     - Java scripts and CSS Files
     - User searches in search boxes of the respective website

@@ -15,7 +15,7 @@ logsource:
     product: sql
     definition: 'Requirements: application error logs must be collected (with LOG_LEVEL ERROR and above)'
 detection:
-    keywords:
+    selection:
         message:
             # Oracle
             - quoted string not properly terminated
@@ -26,7 +26,9 @@ detection:
             # SQLite
             - 'near "*": syntax error'
             - SELECTs to the left and right of UNION do not have the same number of result columns
-    condition: keywords
+        priority: alert
+        program: DATABASE
+    condition: selection
 falsepositives:
     - A syntax error in MySQL also occurs in non-dynamic (safe) queries if there is an empty in() clause, that may often be the case.
 level: high
