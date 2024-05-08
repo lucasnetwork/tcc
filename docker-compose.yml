@@ -1,5 +1,14 @@
 version: '3.8'
 services:
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
+        container_name: tcc-elasticsearch
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+            - xpack.security.enrollment.enabled=false
+        networks:
+            - app
     syslog:
         build: ./syslog
         container_name: tcc-syslog
@@ -8,6 +17,8 @@ services:
         networks:
             - app
         links:
+            - backend
+        depends_on:
             - backend
     backend:
         build: ./backend
@@ -23,17 +34,14 @@ services:
             - POSTGRES_USER=$BACKEND_POSTGRES_USER
             - POSTGRES_PASSWORD=$BACKEND_POSTGRES_PASSWORD
             - POSTGRES_DB=$BACKEND_POSTGRES_DB
-        links:
+            - ELASTIC_SEARCH_URL=$ELASTIC_SEARCH_URL
+        depends_on:
             - elasticsearch
+            - log-database
         env_file: 
             - .env  
         networks:
             - app
-        # logging:
-        #     driver: syslog
-        #     options:
-        #         syslog-address: "udp://192.168.0.111:500"
-        #         tag: "BACKEND"
     frontend:
         build: ./frontend
         container_name: tcc-frontend
@@ -66,15 +74,7 @@ services:
         ports:
             - '5556:5432'
         command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
-    elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.8.2
-        environment:
-            - discovery.type=single-node
-            - xpack.security.enabled=false
-
-            - xpack.security.enrollment.enabled=false
-        networks:
-            - app
+    
 
 networks:
   app:
