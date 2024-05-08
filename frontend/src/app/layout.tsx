@@ -13,16 +13,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <aside className={styles.container_aside}>
-          <nav>
-            <ul className={styles.container_list}>
-              <li>Alertas</li>
-            </ul>
-          </nav>
-        </aside> */}
     
       <div style={{
-        flex:1
+        flex:1,
+        width:"100%"
       }}>
         <header className={styles.containerHeader}>
           SIEM

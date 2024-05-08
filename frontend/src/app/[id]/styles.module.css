@@ -12,8 +12,8 @@
 
 .main {
   display: flex;
-  flex-direction: column;
   padding: 6rem;
+  flex-direction: column;
   padding-top: 1rem;
   min-height: 100vh;
   align-self: stretch;
@@ -21,11 +21,34 @@
   overflow:auto
 }
 
+@media(max-width:500px){
+  .main{
+    padding:2rem
+  }
+}
 .container{
     display: flex;
     row-gap:2rem;
+    flex-wrap: wrap;
     column-gap: 2rem;
     margin-bottom: 2rem;
+}
+
+.container_rule{
+  margin-top:32px;
+}
+
+.container_title{
+  margin-bottom: 16px;
+}
+
+.subtitle{
+  color:#666
+}
+
+.title_rule{
+  font-size: 32px;
+  margin-bottom: 2rem;
 }
 
 .goBack{

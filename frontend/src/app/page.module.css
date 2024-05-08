@@ -7,7 +7,14 @@
   min-height: 100vh;
   align-self: stretch;
   flex:1;
-  overflow:auto
+  overflow:auto;
+  width:100%
+}
+
+@media(max-width:500px){
+  .main{
+    padding:2rem
+  }
 }
 
 .container_bar{

@@ -9,8 +9,6 @@ import { useMemo } from 'react'
 import { format, parseISO } from 'date-fns'
 
 const fetcher = (url:string) => {
-  console.log("Oio")
-  console.log(process.env.NEXT_PUBLIC_URL)
   return api.get(url)
 }
 export default function Home() {
@@ -31,7 +29,13 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      <div>
+
       <h1 className={styles.titleH1}>Dashboard</h1>
+      <p style={{
+        fontSize:24
+      }}>Total de logs:{logsFormated.length}</p>
+      </div>
       <div className={styles.container_bar}>
       <Chart logs={data?.data||[]} />
 
