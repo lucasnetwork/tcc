@@ -13,7 +13,7 @@ services:
         build: ./syslog
         container_name: tcc-syslog
         ports:
-            - 500:514/udp
+            - 514:514/udp
         networks:
             - app
         links:
