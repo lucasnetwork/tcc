@@ -25,16 +25,14 @@ services:
         container_name: tcc-backend
         volumes:
             - ./backend:/backend
-        ports:
-            - 5005:3000
         environment:
             - PORT=3000
-            - POSTGRES_HOST=$BACKEND_POSTGRES_HOST
-            - POSTGRES_PORT=$BACKEND_POSTGRES_PORT
-            - POSTGRES_USER=$BACKEND_POSTGRES_USER
-            - POSTGRES_PASSWORD=$BACKEND_POSTGRES_PASSWORD
+            - POSTGRES_HOST=tcc-database
+            - POSTGRES_PORT=5432
+            - POSTGRES_USER=adm
+            - POSTGRES_PASSWORD=12345
             - POSTGRES_DB=$BACKEND_POSTGRES_DB
-            - ELASTIC_SEARCH_URL=$ELASTIC_SEARCH_URL
+            - ELASTIC_SEARCH_URL=http://tcc-elasticsearch:9200
         depends_on:
             - elasticsearch
             - log-database
@@ -42,15 +40,23 @@ services:
             - .env  
         networks:
             - app
+    reverse-proxy:
+        build: ./nginx
+        networks:
+            - app
+        ports:
+            - 3000:80
+        depends_on:
+            - backend
+            - log-database
+            - frontend
     frontend:
         build: ./frontend
         container_name: tcc-frontend
         volumes:
             - ./frontend:/frontend
         environment:
-            - NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
-        ports:
-            - 3002:3000
+            - NEXT_PUBLIC_URL=api-backend
         env_file: 
             - .env  
         networks:
