@@ -15,6 +15,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "build": "tsc",
+    "start":"node dist/server.js",
     "migration:generate": "ts-node-dev ./node_modules/typeorm/cli migration:generate -d ./src/database/index.ts",
     "migration:create": "ts-node-dev ./node_modules/typeorm/cli migration:create",
     "migration:run": "ts-node-dev ./node_modules/typeorm/cli migration:run -d ./src/database/index.ts"

@@ -8,12 +8,12 @@ route.post('/', async (req, res) => {
 })
 
 route.get('/logs/:id', async (req, res) => {
-  const response = await findOneLogsUseCase().handle(req, res)
+  const response = await findOneLogsUseCase().handle(req)
   return res.status(200).json(response)
 })
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-route.get('/logs', async (req, res) => {
-  const response = await findAllLogsUseCase().handle(req, res)
+route.get('/logs', async (_req, res) => {
+  const response = await findAllLogsUseCase().handle()
   return res.status(200).json(response)
 })
 

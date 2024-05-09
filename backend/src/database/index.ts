@@ -10,8 +10,8 @@ const options: DataSourceOptions = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  migrations: ['./src/database/migrations/*.ts'],
-  entities: ['./src/database/entities/*.ts']
+  migrations: ['./dist/database/migrations/*.js'],
+  entities: ['./dist/database/entities/*.js']
 }
 
 export const AppSource = new DataSource(options)
@@ -24,6 +24,7 @@ export const InitializeConnection = async () => {
     await AppSource.setOptions({ host, database }).initialize()
     console.log('database online')
   } catch (err) {
+    console.log(err)
     process.exit(1)
   }
 }

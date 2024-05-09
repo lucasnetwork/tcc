@@ -19,7 +19,7 @@ class App {
     const handleCreateAlert = createLogAlertUseCase()
 
     const job = new CronJob(
-      '1 * * * * *',
+      '2 * * * * *',
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       async (): Promise<void> => {
         try {
