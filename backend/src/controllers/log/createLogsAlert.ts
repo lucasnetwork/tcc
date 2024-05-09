@@ -11,10 +11,9 @@ class CreateLogAlertController {
     isodate: string
     host: string
     facility: string
-    id: string
-    rule: RuleEntitie
+    rule: RuleEntitie | string
   }>) {
-    const body = rest.map(({ id, ...rest }) => rest)
+    const body = rest.map(({ ...rest }) => rest)
     await this.logRepository.createMany(body)
   }
 }

@@ -50,6 +50,7 @@ class GetLogsToAnalisysController implements IUseCase {
         isodate: string
         host: string
         facility: string
+        rule: string
       }>
       rule: string
     }> = []

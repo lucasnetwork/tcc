@@ -19,12 +19,26 @@ class App {
     const handleCreateAlert = createLogAlertUseCase()
 
     const job = new CronJob(
-      '* * * * * *',
+      '1 * * * * *',
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       async (): Promise<void> => {
-        const response = await handle.handle()
-        if (response.length === 0) return
-        await handleCreateAlert.handle(response.reduce((prev, data) => [...prev, ...data.data], []))
+        try {
+          const response = await handle.handle()
+          if (response.length === 0) return
+          const logs = response.reduce<Array<{
+            date: string
+            program: string
+            priority: string
+            message: string
+            isodate: string
+            host: string
+            facility: string
+            rule: string
+          }>>((prev, data) => [...prev, ...data.data], [])
+          await handleCreateAlert.handle(logs)
+        } catch {
+
+        }
       },
       null,
       true,

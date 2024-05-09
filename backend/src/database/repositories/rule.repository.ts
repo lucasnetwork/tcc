@@ -30,7 +30,6 @@ export class RuleRepository implements IRuleRepository {
 
   async findOne (data: FindOneOptions<RuleEntitie>): Promise<RuleEntitie> {
     const feature = await this.rules.findOne(data)
-    console.log(data.where)
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!feature) {
       throw new Error('Log not found')

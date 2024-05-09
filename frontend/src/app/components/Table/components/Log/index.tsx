@@ -6,6 +6,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const Log = ({log}:{
     log:{
+      id:string
         program:string
         priority:string
         message:string

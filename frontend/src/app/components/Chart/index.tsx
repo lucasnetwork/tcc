@@ -57,7 +57,6 @@ const Chart = ({logs}:{
       }]
     }
    },[logs])
-  console.log(data)
    return  <Bar style={{height:"300px"}} options={options}  data={data} />
 };
 export default Chart

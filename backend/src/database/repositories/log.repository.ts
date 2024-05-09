@@ -20,9 +20,7 @@ export class LogRepository implements ILogRepository {
   }
 
   async all (): Promise<ILog[]> {
-    console.log('oiooi', this.logs)
     const features = await this.logs.find()
-    console.log(features)
     return features
   }
 

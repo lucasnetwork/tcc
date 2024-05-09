@@ -1,7 +1,17 @@
 "use client";
 import Log from "./components/Log";
 import styles from "./styles.module.css";
-const Table = ({ logs }) => (
+const Table = ({ logs }:{
+  logs:{
+    id:string
+      program:string
+      priority:string
+      message:string
+      isodate:string
+      host:string
+      facility:string
+  }[]
+}) => (
   <div className={styles.table}>
     <div className={styles.headTable}>
       <div

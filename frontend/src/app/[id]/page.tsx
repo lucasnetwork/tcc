@@ -21,12 +21,7 @@ interface ILog {
     author: string;
     date: string;
     description: string;
-    detection: {
-      condition: string;
-      keywords: {
-        message: string[];
-      };
-    };
+    detection:any
     falsepositives: string[];
     id: string;
     level: string;
@@ -44,8 +39,6 @@ interface ILog {
 }
 
 const fetcher = async ([url, id]: string[]) => {
-  console.log("Oio");
-  console.log(process.env.NEXT_PUBLIC_URL);
   const response = await api.get<ILog>(`logs/${id}`);
   return response;
 };
@@ -160,7 +153,7 @@ export default function Home() {
           <div className={styles.container_title}>
           <h2>Condições de Detecção: {data?.data?.rule?.detection.condition}</h2>
           <div>
-            {JSON.stringify(data?.data?.rule?.detection[data?.data?.rule?.detection.condition])}
+            {JSON.stringify(data?.data?.rule?.detection[data?.data?.rule?.detection.condition] as any)}
           </div>
         </div>
         <div>
