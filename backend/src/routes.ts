@@ -4,7 +4,7 @@ import { createLogUseCase, findAllLogsUseCase, findOneLogsUseCase } from './useC
 
 const route = Router()
 route.post('/', async (req, res) => {
-  createLogUseCase().handle(req, res)
+  void createLogUseCase().handle(req, res)
 })
 
 route.get('/logs/:id', async (req, res) => {

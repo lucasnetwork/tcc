@@ -14,7 +14,7 @@ class App {
     this.app = express()
     this.app.use(cors())
     this.app.use(express.json())
-    this.app.use('/', router)
+    this.app.use('/api-backend', router)
     const handle = getLogsToAnalisys()
     const handleCreateAlert = createLogAlertUseCase()
 
