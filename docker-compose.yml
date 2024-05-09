@@ -16,15 +16,11 @@ services:
             - 514:514/udp
         networks:
             - app
-        links:
-            - backend
         depends_on:
             - backend
     backend:
         build: ./backend
         container_name: tcc-backend
-        volumes:
-            - ./backend:/backend
         environment:
             - PORT=3000
             - POSTGRES_HOST=tcc-database
@@ -53,16 +49,12 @@ services:
     frontend:
         build: ./frontend
         container_name: tcc-frontend
-        volumes:
-            - ./frontend:/frontend
         environment:
             - NEXT_PUBLIC_URL=api-backend
         env_file: 
             - .env  
         networks:
             - app
-        depends_on:
-            - syslog
         logging:
             driver: syslog
             options:
