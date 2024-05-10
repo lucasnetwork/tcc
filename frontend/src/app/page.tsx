@@ -16,10 +16,10 @@ export default function Home() {
     data:any[]
   }>("logs",fetcher)
   const logsFormated = useMemo(()=>{
-    if(!data){
+    if(!data?.data){
       return []
     }
-    const logs = data.data.map(log =>{
+    const logs = data?.data?.map(log =>{
       const date = format(parseISO(log.isodate),"dd/MM/yyyy HH:mm:ss")
       return {...log,isodate:date}
     })
